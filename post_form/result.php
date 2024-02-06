@@ -7,31 +7,32 @@
 </head>
 <body>
     <?php
+          echo  $_POST['v-one']. " ".$_POST['op']." ".$_POST['v-two']."= "  ;
     //    $result =  $_POST["v-one"] $_POST["op"] $_POST["v-two"];
     switch($_POST['op']){
         case '+':
             $result = $_POST["v-one"] + $_POST["v-two"];
-            echo  $_POST["v-one"] . $_POST["op"] .$_POST["v-two"]." = " .$result;
+            echo  $result;
             break;
         case '-':
             $result = $_POST["v-one"] - $_POST["v-two"];
-            echo  $_POST["v-one"] . $_POST["op"] .$_POST["v-two"]." = " .$result;
+            echo  $result;
             break;
         case '*':
             $result = $_POST["v-one"] * $_POST["v-two"];
-            echo  $_POST["v-one"] . $_POST["op"] .$_POST["v-two"]." = " .$result;
+            echo  $result;
             break;
         case '**':
             $result = $_POST["v-one"] ** $_POST["v-two"];
-            echo  $_POST["v-one"] . $_POST["op"] .$_POST["v-two"]." = " .$result;
+            echo  $result;
             break;
         case '/':
             $result = $_POST["v-one"] / $_POST["v-two"];
-            echo  $_POST["v-one"] . $_POST["op"] .$_POST["v-two"]." = " .$result;
+            echo  $result;
             break;
         case '%':
             $result = $_POST["v-one"] % $_POST["v-two"];
-            echo  $_POST["v-one"] . $_POST["op"] .$_POST["v-two"]." = " .$result;
+            echo  $result;
             break;
         default:
             echo "INVALID";
