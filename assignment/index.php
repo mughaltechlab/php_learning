@@ -119,30 +119,32 @@
     }
     sortingArr($sortArr);
     // find n number of max value in an array
-    $arr = [8,6,10,2];
-    echo "<h3>find nth number of largest value in an array:</h3>";
-    function maxValue2($x = array(), $key = 0){
-        $k = $key;
-        $fake = $x[0];
-        for ($n=0; $n < $key; $n++) { 
-            # code...
-            for ($i=0; $i < count($x); $i++) { 
-                if ($x[$i] > $fake) {
-                    $fake = $x[$i];
+    $maxArr = [1,10.5,6,10,12,9,-2];
+    echo "<h3>find n number of largest value in an array:</h3>";
+    function nfindMax($arr, $key){
+        $el = 0;
+        for ($i=0; $i < count($arr); $i++) { 
+            for ($j=0; $j < count($arr) ; $j++) {
+              $check = $i + 1;
+              if($check < count($arr)){
+                if ($arr[$j] > $arr[$i + 1]) {
+                    // a = $arr[$j] b= $arr[$i+1]
+                    $el = $arr[$j];
+                    $arr[$j] = $arr[$i + 1];
+                    $arr[$i + 1] = $el;
                 }
-
+              }
             }
-            $k = array_search($fake , $x);
-            $box = $x[$k];
-            $a
-
         }
-        echo "$key number max : $box ";
-
+        $index = count($arr);
+        $check = $index - $key;
+        echo $arr[$check];
+        
     }
-    print_r($arr);
+    print_r($maxArr);
     echo "<br>";
-    maxValue2($arr , 1);
+    nfindMax($maxArr,1 );
+
     
     ?>
 </body>
