@@ -12,6 +12,8 @@
             // echo $empName;
             $query  = "INSERT INTO employee(emp_name) VALUES ('{$empName}')";
             $result = mysqli_query($con, $query) or die("Query Failed") ;
+            header('location: http://localhost/php_mysql/employee/emp_data.php');
+            // echo "<script> window.location.assign('emp_data.php'); </script>";
         }
     }
 
