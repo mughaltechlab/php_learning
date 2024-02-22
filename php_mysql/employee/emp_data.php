@@ -2,8 +2,15 @@
 
 $con = mysqli_connect("localhost", "root", "", "crud") or die("Connection failed");
 
-# code...
-$query = "SELECT * FROM employee";
+$limit = 5;
+if (isset($_GET['page'])) {
+    $CurrentPage = $_GET['page'];
+} else {
+    $CurrentPage = 1;
+}
+
+$num_of_rows = ($CurrentPage - 1) * $limit;
+$query = "SELECT * FROM employee LIMIT $num_of_rows,$limit";
 $result = mysqli_query($con, $query) or die("Query Failed");
 if (mysqli_num_rows($result) >= 1) {
 ?>
@@ -49,6 +56,20 @@ if (mysqli_num_rows($result) >= 1) {
                 <?php } ?>
                 </tbody>
             </table>
+            <div class="containe text-center">
+            <?php
+                $query = "SELECT * FROM employee";
+                $result = mysqli_query($con, $query);
+                $rows = mysqli_num_rows($result);
+                $total_pages = ceil($rows/$limit);
+                for ($i=1; $i <= $total_pages; $i++) { 
+                    # code...
+                    echo "
+                        <a class='border p-2' href='emp_data.php?page=".$i."'>".$i."</a>
+                    ";
+                }
+            ?>
+            </div>
         </div>
     <?php } mysqli_close($con); ?>
 
