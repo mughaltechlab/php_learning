@@ -61,7 +61,7 @@
                   </div>
                 </div>
               </div>
-              <form action="#!">
+              <form action="db/process.php" method="post">
                 <div class="row gy-3 overflow-hidden">
                   
                   <div class="col-12">
@@ -86,7 +86,7 @@
                   </div>
                   <div class="col-12">
                     <div class="d-grid">
-                      <button class="btn bsb-btn-2xl btn-primary" type="submit">Sign up</button>
+                      <button class="btn bsb-btn-2xl btn-primary" name="login" type="submit">Sign in</button>
                     </div>
                   </div>
                 </div>

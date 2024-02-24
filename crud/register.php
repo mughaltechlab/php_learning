@@ -133,15 +133,15 @@
                   <div>
                     <select class="form-select" name="religion" aria-label="Default select example">
                       <option selected disabled>Select your religion</option>
-                      <option value="muslim">Muslim</option>
-                      <option value="non-muslim">Non-muslim</option>
-                      <option value="christian">Christian</option>
+                      <option value="Islam">Islam</option>
+                      <option value="Hinduism">Hinduism</option>
+                      <option value="Christian">Christian</option>
                     </select>
                   </div>
                   <!-- //* profile image -->
                   <div class="mb-3">
                     <label for="formFileSm" class="form-label text-secondary" style="font-size: 12px;">Upload profile image upto 1mb</label>
-                    <input class="form-control" name="image" id="formFileSm" type="file">
+                    <input class="form-control" name="image" accept='image/jpeg,image/jpg,image/png' id="formFileSm" type="file">
                   </div>
                   <!-- //* description -->
                   <div class="form-group mb-3">

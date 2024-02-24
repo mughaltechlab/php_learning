@@ -63,6 +63,21 @@ if (isset($_POST['register'])) {
     } else {
         echo "The End";
     }
+} elseif (isset($_POST['login'])) {
+    # code...
+   if (isset($_POST['email']) && isset($_POST['password']) ) {
+    # code...
+    $email = $_POST['email'];
+    $password = md5($_POST['password']);
+    $query = "SELECT * FROM `employee_two` WHERE email='$email' AND password='$password'";
+    $result = mysqli_query($con,$query);
+    if (mysqli_fetch_assoc($result)) {
+        # code...
+        header('location: ../index.php');
+    }else {
+        echo "error in query";
+    }
+   }
 } else {
     echo "Network is slow";
 }
