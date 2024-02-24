@@ -48,9 +48,9 @@
                         <td><?php echo $email ?></td>
                         <td><?php echo $gender ?></td>
                         <td>
-                            <button class="btn"><a href="#?updateId=<?php echo $id ?>" class="text-primary text-decoration-none"><i class="bi bi-eye"></i></a></button>
-                            <button class="btn"><a href='#?deleteId=<?php echo $id ?>' class='text-success text-decoration-none'><i class="bi bi-pen"></i></a></button>
-                            <button class="btn"><a href='#?deleteId=<?php echo $id ?>' class='text-danger text-decoration-none'><i class="bi bi-trash"></i></a></button>
+                            <button class="btn"><a href="show.php?viewId=<?php echo $id ?>" class="text-primary text-decoration-none"><i class="bi bi-eye"></i></a></button>
+                            <button class="btn"><a href='update.php?updateId=<?php echo $id ?>' class='text-success text-decoration-none'><i class="bi bi-pen"></i></a></button>
+                            <button class="btn"><a href='db/delete.php?deleteId=<?php echo $id ?>' class='text-danger text-decoration-none'><i class="bi bi-trash"></i></a></button>
                         </td>
                         <!-- <td>
                             <button class="btn btn-success"><a href="#?updateId=" class="text-white text-decoration-none" >Update</a></button>

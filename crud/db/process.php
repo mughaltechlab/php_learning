@@ -71,7 +71,7 @@ if (isset($_POST['register'])) {
     $password = md5($_POST['password']);
     $query = "SELECT * FROM `employee_two` WHERE email='$email' AND password='$password'";
     $result = mysqli_query($con,$query);
-    if (mysqli_fetch_assoc($result)) {
+    if (mysqli_num_rows($result) > 0) {
         # code...
         header('location: ../index.php');
     }else {

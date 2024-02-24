@@ -1,15 +1,35 @@
 <?php
   include("db/config.php");
 
-  if (isset($_GET['viewId'])) {
+  if (isset($_GET['updateId'])) {
     # code...
-    $id = $_GET['viewId'];
+    $id = $_GET['updateId'];
 
-    // $query = "SELECT * FROM employee_two WHERE id=$id";
     $result = mysqli_query($con,"SELECT * FROM employee_two WHERE id=$id");
     if (mysqli_num_rows($result) == 1) {
+        $row = mysqli_fetch_assoc($result);
+        if (isset($_POST['update'])) {
+            $query = "UPDATE employee_two SET
+            id=$id, 
+            fullname='{$_POST['fullName']}',	
+            username='{$_POST['username']}',
+            email='{$_POST['email']}',
+            gender='{$_POST['gender']}',
+            religion='{$_POST['religion']}',
+            description='{$_POST['description']}' WHERE id=$id
+            ";
+            $result = mysqli_query($con,$query);
+            if ($result) {
+                # code...
+                echo "<script>
+                window.alert('Update successfully');
+                window.location.assign('index.php');
+                </script>";
+            }
+
+            
+        }
       # code...
-      $row = mysqli_fetch_assoc($result);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -177,16 +197,16 @@
   <body>
     <h3>Data</h3>
     <div class="form-div">
-      <form action="process.php" method="post" enctype="multipart/form-data">
+      <form action="" method="post" enctype="multipart/form-data">
         <div class="profile-row">
           <div class="col-6">
             <div class="fullname-div">
               <label for="">Fullname </label>
-              <input type="text" name="name" id="name" value="<?php echo $row['fullname'] ?>" readonly/>
+              <input type="text" name="fullName" id="name" value="<?php echo $row['fullname'] ?>" />
             </div>
             <div class="username-div">
               <label for="">Username</label>
-              <input type="text" name="username" value="<?php echo $row['username'] ?>" readonly />
+              <input type="text" name="username" value="<?php echo $row['username'] ?>"  />
             </div>
           </div>
           <div class="img">
@@ -196,28 +216,27 @@
 
         <div class="email-div">
           <label for="">Email</label>
-          <input type="text" name="email" value="<?php echo $row['email'] ?>" readonly/>
+          <input type="text" name="email" value="<?php echo $row['email'] ?>" />
         </div>
         <div class="password-div">
           <label for="">Gender</label>
-          <input type="text" name="password" value="<?php echo $row['gender'] ?>" readonly/>
+          <input type="text" name="gender" value="<?php echo $row['gender'] ?>" />
         </div>
         <div class="religion-div">
           <label for="">Religion</label>
-          <input type="text" name="password" value="<?php echo $row['religion'] ?>" readonly/>
+          <input type="text" name="religion" value="<?php echo $row['religion'] ?>" />
         </div>
         <div class="description-div">
-          <label for="">Description</label>
-          <div class="text-area" name="description"><?php echo $row['description'] ?>
-        </div>
+            <label for="">Description</label>
+            <textarea class="text-area" name="description" id="" cols="" rows="6"><?php echo $row['description'] ?></textarea>
         </div>
 
+        <!-- update button -->
+        <div>
+            <button value="update" name="update" class = "btn">Update</button>
+        </div>
       </form>
     </div>
-    <!-- print button -->
-    <!-- <div>
-        <button value="submit_register" name="submit" class = "btn">Print</button>
-    </div> -->
   <?php
     }else { die("Fetching data error"); }
     }else {
