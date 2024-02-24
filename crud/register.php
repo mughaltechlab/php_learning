@@ -72,16 +72,17 @@
                   </div>
                 </div>
               </div>
-              <form action="#!">
+              <form action="./db/process.php" method="post" enctype="multipart/form-data">
                 <div class="row gy-3 overflow-hidden">
                   <div class="form-group d-flex justify-content-between ">
-
+                    <!--//* first name -->
                     <div class="">
                       <div class="form-floating mb-3">
                         <input type="text" class="form-control" name="firstName" id="firstName" placeholder="First Name" required>
                         <label for="firstName" class="form-label">First Name</label>
                       </div>
                     </div>
+                    <!--//* last name -->
                     <div class="">
                       <div class="form-floating mb-3">
                         <input type="text" class="form-control" name="lastName" id="lastName" placeholder="First Name" required>
@@ -89,32 +90,33 @@
                       </div>
                     </div>
                   </div>
-
+                  <!-- //* email -->
                   <div class="col-12">
                     <div class="form-floating mb-3">
                       <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
                       <label for="email" class="form-label">Email</label>
                     </div>
                   </div>
+                  <!-- //* password -->
                   <div class="col-12">
                     <div class="form-floating mb-3">
                       <input type="password" class="form-control" name="password" id="password" value="" placeholder="Password" required>
                       <label for="password" class="form-label">Password</label>
                     </div>
                   </div>
-
+                  <!-- //* gender -->
                   <div class="gender form-group d-flex justify-content-between">
                     <label for="gender" class="form-label">Gender</label>
                     <div class=" col-10 d-flex justify-content-around">
 
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gender" value="other" id="gender1">
+                        <input class="form-check-input" type="radio" name="gender" value="male" id="gender1">
                         <label class="form-check-label" for="gender1">
                           Male
                         </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gender" value="other" id="gender2">
+                        <input class="form-check-input" type="radio" name="gender" value="female" id="gender2">
                         <label class="form-check-label" for="gender2">
                           Female
                         </label>
@@ -127,22 +129,24 @@
                       </div>
                     </div>
                   </div>
+                  <!-- //* religion -->
                   <div>
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected disabled>Select your religion</option>
-                    <option value="muslim">Muslim</option>
-                    <option value="non-muslim">Non-muslim</option>
-                    <option value="christian">Christian</option>
-                  </select>
+                    <select class="form-select" name="religion" aria-label="Default select example">
+                      <option selected disabled>Select your religion</option>
+                      <option value="muslim">Muslim</option>
+                      <option value="non-muslim">Non-muslim</option>
+                      <option value="christian">Christian</option>
+                    </select>
                   </div>
+                  <!-- //* profile image -->
                   <div class="mb-3">
-                    <label for="formFileSm" class="form-label">Small file input example</label>
-                    <input class="form-control form-control" id="formFileSm" type="file">
+                    <label for="formFileSm" class="form-label text-secondary" style="font-size: 12px;">Upload profile image upto 1mb</label>
+                    <input class="form-control" name="image" id="formFileSm" type="file">
                   </div>
-
+                  <!-- //* description -->
                   <div class="form-group mb-3">
                     <label class="form-label" class="p-2" for="description">Description</label>
-                    <textarea class="form-control" id="description" rows="6"></textarea>
+                    <textarea class="form-control" name="description" id="description" rows="6"></textarea>
                   </div>
 
                   <div class="col-12">
@@ -155,7 +159,7 @@
                   </div>
                   <div class="col-12">
                     <div class="d-grid">
-                      <button class="btn bsb-btn-2xl btn-primary" type="submit">Sign up</button>
+                      <button class="btn bsb-btn-2xl btn-primary" type="submit" name="register">Sign up</button>
                     </div>
                   </div>
                 </div>
@@ -163,7 +167,7 @@
               <div class="row">
                 <div class="col-12">
                   <hr class="mt-5 mb-4 border-secondary-subtle">
-                  <p class="m-0 text-secondary text-center">Already have an account? <a href="login.html" class="link-primary text-decoration-none">Sign in</a></p>
+                  <p class="m-0 text-secondary text-center">Already have an account? <a href="./login.php" class="link-primary text-decoration-none">Sign in</a></p>
                 </div>
               </div>
 

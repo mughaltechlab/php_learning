@@ -94,7 +94,7 @@
               <div class="row">
                 <div class="col-12">
                   <hr class="mt-5 mb-4 border-secondary-subtle">
-                  <p class="m-0 text-secondary text-center">Create an account? <a href="register.html" class="link-primary text-decoration-none">Sign Up</a></p>
+                  <p class="m-0 text-secondary text-center">Create an account? <a href="./register.php" class="link-primary text-decoration-none">Sign Up</a></p>
                 </div>
               </div>
               
