@@ -38,6 +38,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php echo $row['fullname'].'\'s' ?> Details</title>
     <style>
+      :root {
+      --grd1: rgba(0, 0, 0, 0.4);
+      --grd2: rgba(0, 255, 255, 0.267);
+      }
       body {
         display: flex;
         flex-direction: column;
@@ -45,11 +49,14 @@
         text-align: center;
         gap: 10px;
         font-size: 22px;
-        background-color: #f3f1ff;
+        background: linear-gradient(110deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 300%);
         font-family: arial;
       }
+      body::after{
+        content: 0;
+      }
       input {
-        width: 200px;
+        width: 60%;
         padding: 10px;
         border-radius: 10px;
         background-color: #f3f1ff;
@@ -57,7 +64,7 @@
         /* box-shadow: 0 0 5px 0 purple; */
       }
       .text-area {
-        width: 200px;
+        width: 60%;
         height: fit-content;
         padding: 10px;
         border-radius: 10px;
@@ -67,7 +74,9 @@
       .form-div {
         display: flex;
         flex-direction: column;
-        background-color: white;
+        /* background-color: white; */
+        /* background: rgba(0, 212, 255, .4); */
+        background: rgba(200,200,200, .3);
         width: 450px;
         align-items: center;
         justify-content: center;
@@ -75,7 +84,41 @@
         padding: 10px;
         font-size: 16px;
         padding: 10px;
-        box-shadow: 0 0 5px 0 blue;
+        /* box-shadow: 0 0 20px rgba(2, 0, 36, .4), inset 0 0 20px rgba(200, 200, 255, .3) ; */
+        background: rgba(0, 0, 0, 0.4);
+        box-shadow: 0 0 15px 0 rgba(200, 200, 200, .2),
+                    0 0 15px 0 rgba(200, 200, 200, .2);
+        color: rgb(185, 180, 180);
+        transition: transform .55s ease-in-out;
+      }
+      .form-div:hover {
+        /* background: linear-gradient(10deg,var(--grd1),var(--grd1),var(--grd2),var(--grd1),var(--grd1)); */
+        transition: background .22s linear;
+        animation: shade .55s ease-in-out reverse;
+        animation-delay: 1s;
+        animation-timing-function: linear;
+      }
+
+      @keyframes shade {
+        0% {
+          background: linear-gradient(10deg, var(--grd2), var(--grd1), var(--grd1), var(--grd1), var(--grd1));
+        }
+
+        25% {
+          background: linear-gradient(10deg, var(--grd1), var(--grd2), var(--grd1), var(--grd1), var(--grd1));
+        }
+
+        50% {
+          background: linear-gradient(10deg, var(--grd1), var(--grd1), var(--grd2), var(--grd1), var(--grd1));
+        }
+
+        75% {
+          background: linear-gradient(10deg, var(--grd1), var(--grd1), var(--grd1), var(--grd2), var(--grd1));
+        }
+
+        100% {
+          background: linear-gradient(10deg, var(--grd1), var(--grd1), var(--grd1), var(--grd1), var(--grd2));
+        }
       }
       form {
         display: flex;
@@ -108,8 +151,11 @@
       .fullname-div,
       .username-div {
         display: flex;
-        flex-direction: column;
+        justify-content: space-between;
         align-items: start;
+      }
+      .profile-row input{
+        width: 40%;
       }
       .gender-div,
       .genders {
@@ -178,19 +224,74 @@
         font-size: 12px;
       }
       .img{
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* overflow: hidden; */
         border: 1px solid #6550ef;
+        object-fit: cover;
         padding: 10px;
         background-color: #f3f1ff;
+      }
+      .img img{
+        width: 100px;
+        object-fit: fill;
       }
       .profile-img {
         width: 100px;
         height: 100px;
         background-image: url(<?php echo 'images/'.$row['profile_image'] ?>);
         background-size: cover;
+        background-position: center;
       }
       .profile-row {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+      }
+      .update-btn-div{
+        text-align: start;
+      }
+      .update-btn-div .btn{
+        width: 100%;
+        border: 1px solid var(--grd2);
+        background: var(--grd2);
+        height: 30px;
+        box-shadow:inset 1px -1px 1px rgb(253, 253, 253);
+        transition: background .35s ease-in-out;
+      }
+      .update-btn-div .btn:hover{
+        /* background: #1e0b95; */
+        border: 1px solid var(--grd2);
+        box-shadow: 1px 1px 1px rgb(253, 253, 253);
+        transition: background .22s linear;
+        animation: shade .55s ease-in-out reverse;
+        animation-timing-function: linear;
+        background: var(--grd1);
+      }
+      @keyframes shade {
+        0% {
+          background: linear-gradient(10deg, var(--grd2), var(--grd1), var(--grd1), var(--grd1), var(--grd1));
+        }
+
+        25% {
+          background: linear-gradient(10deg, var(--grd2), var(--grd2), var(--grd1), var(--grd1), var(--grd1));
+        }
+
+        50% {
+          background: linear-gradient(10deg, var(--grd2), var(--grd2), var(--grd2), var(--grd1), var(--grd1));
+        }
+
+        75% {
+          background: linear-gradient(10deg, var(--grd2), var(--grd2), var(--grd2), var(--grd2), var(--grd1));
+        }
+
+        100% {
+          background: linear-gradient(10deg, var(--grd2), var(--grd2), var(--grd2), var(--grd2), var(--grd2));
+        }
       }
     </style>
   </head>
@@ -199,7 +300,7 @@
     <div class="form-div">
       <form action="" method="post" enctype="multipart/form-data">
         <div class="profile-row">
-          <div class="col-6">
+          <div class="input-div" style="display:flex; flex-direction:column; gap:12px;">
             <div class="fullname-div">
               <label for="">Fullname </label>
               <input type="text" name="fullName" id="name" value="<?php echo $row['fullname'] ?>" />
@@ -210,7 +311,8 @@
             </div>
           </div>
           <div class="img">
-            <div class="profile-img"></div>
+            <img src="<?php echo 'images/'.$row['profile_image'] ?>" alt="<?php echo $row['fullname'].'\'s Profile Image' ?>">
+            <!-- <div class="profile-img"></div> -->
           </div>
         </div>
 
@@ -232,7 +334,7 @@
         </div>
 
         <!-- update button -->
-        <div>
+        <div class="update-btn-div">
             <button value="update" name="update" class = "btn">Update</button>
         </div>
       </form>
