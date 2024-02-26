@@ -17,6 +17,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php echo $row['fullname'].'\'s' ?> Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
       :root {
       --grd1: rgba(0, 0, 0, 0.4);
@@ -153,7 +154,7 @@
         width: 100px;
       }
       h3 {
-        color: black;
+        color: #f3f1ff;
       }
       a {
         height: 10px;
@@ -212,23 +213,28 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        /* overflow: hidden; */
+        overflow: hidden;
         border: 1px solid #6550ef;
         object-fit: cover;
         padding: 10px;
         background-color: #f3f1ff;
       }
       .img img{
-        width: 100px;
-        object-fit: fill;
+        /* width: 100px; */
+        height: 100px;
+        object-fit: cover;
+        transition: transform .22s ease-in-out;
       }
-      .profile-img {
+      .img img:hover{
+        transform: scale(1.1);
+      }
+      /* .profile-img {
         width: 100px;
         height: 100px;
-        background-image: url(<?php echo 'images/'.$row['profile_image'] ?>);
+        background-image: url();
         background-size: cover;
         background-position: center;
-      }
+      } */
       .profile-row {
         display: flex;
         justify-content: space-between;
@@ -255,25 +261,31 @@
         background: var(--grd1);
       }
       @keyframes shade {
-      0% {
-        background: linear-gradient(10deg, var(--grd2), var(--grd1), var(--grd1), var(--grd1), var(--grd1));
-      }
+        0% {
+          background: linear-gradient(10deg, var(--grd2), var(--grd1), var(--grd1), var(--grd1), var(--grd1));
+        }
 
-      25% {
-        background: linear-gradient(10deg, var(--grd2), var(--grd2), var(--grd1), var(--grd1), var(--grd1));
-      }
+        25% {
+          background: linear-gradient(10deg, var(--grd2), var(--grd2), var(--grd1), var(--grd1), var(--grd1));
+        }
 
-      50% {
-        background: linear-gradient(10deg, var(--grd2), var(--grd2), var(--grd2), var(--grd1), var(--grd1));
-      }
+        50% {
+          background: linear-gradient(10deg, var(--grd2), var(--grd2), var(--grd2), var(--grd1), var(--grd1));
+        }
 
-      75% {
-        background: linear-gradient(10deg, var(--grd2), var(--grd2), var(--grd2), var(--grd2), var(--grd1));
-      }
+        75% {
+          background: linear-gradient(10deg, var(--grd2), var(--grd2), var(--grd2), var(--grd2), var(--grd1));
+        }
 
-      100% {
-        background: linear-gradient(10deg, var(--grd2), var(--grd2), var(--grd2), var(--grd2), var(--grd2));
+        100% {
+          background: linear-gradient(10deg, var(--grd2), var(--grd2), var(--grd2), var(--grd2), var(--grd2));
+        }
       }
+      .header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 450px;
       }
     </style>
     <!-- <style>
@@ -434,8 +446,18 @@
     </style> -->
   </head>
   <body>
-    <h3>Data</h3>
+    <div class="header">
+      <a href="./index.php"><i class="bi bi-arrow-left"></i></a>
+      <h3> View <?php echo $row['fullname'].'\'s Details' ?>  </h3>
+    </div>
     <div class="form-div">
+      <div style="display: flex; align-items:center; justify-content: space-between; width:100%; color:#f3f1ff;">
+        <div style="display: flex;  color:#f3f1ff;">
+          <h3> Id #</h3>
+          <h3><?php echo "&nbsp;".$row['id'] ?></h3>
+        </div>
+        <a href='update.php?updateId=<?php echo $id ?>'><i class="bi bi-pen"></i></a>
+      </div>
       <form action="process.php" method="post" enctype="multipart/form-data">
         <div class="profile-row">
           <div class="" style="display:flex; flex-direction:column; gap:12px;">
@@ -449,7 +471,8 @@
             </div>
           </div>
           <div class="img">
-            <div class="profile-img"></div>
+            <img src="<?php echo 'images/'.$row['profile_image'] ?>" alt="<?php echo $row['fullname'].'\'s Profile Image' ?>">
+            <!-- <div class="profile-img"></div> -->
           </div>
         </div>
 

@@ -21,13 +21,9 @@
             $result = mysqli_query($con,$query);
             if ($result) {
                 # code...
-                echo "<script>
-                window.alert('Update successfully');
-                window.location.assign('index.php');
-                </script>";
+                $_SESSION['update'] = "$id update successfully";
+                header("location: ./index.php");
             }
-
-            
         }
       # code...
 ?>
@@ -37,10 +33,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php echo $row['fullname'].'\'s' ?> Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
       :root {
-      --grd1: rgba(0, 0, 0, 0.4);
-      --grd2: rgba(0, 255, 255, 0.267);
+        --grd1: rgba(0, 0, 0, 0.4);
+        --grd2: rgba(0, 255, 255, 0.267);
       }
       body {
         display: flex;
@@ -171,7 +168,7 @@
         width: 100px;
       }
       h3 {
-        color: black;
+        color: #f3f1f1;
       }
       a {
         height: 10px;
@@ -230,15 +227,18 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        /* overflow: hidden; */
+        overflow: hidden;
         border: 1px solid #6550ef;
-        object-fit: cover;
         padding: 10px;
         background-color: #f3f1ff;
       }
       .img img{
-        width: 100px;
-        object-fit: fill;
+        width: 100%;
+        filter: contrast(1.1);
+        transition: transform .22s ease-in-out;
+      }
+      .img img:hover{
+        transform: scale(1.1);
       }
       .profile-img {
         width: 100px;
@@ -293,11 +293,24 @@
           background: linear-gradient(10deg, var(--grd2), var(--grd2), var(--grd2), var(--grd2), var(--grd2));
         }
       }
+      .header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 450px;
+      }
     </style>
   </head>
   <body>
-    <h3>Data</h3>
+    <div class="header">
+      <h3> Update Form </h3>
+      <a href="<?php echo $_SERVER['HTTP_REFERER']?>"><i class="bi bi-x-lg"></i></a>
+    </div>
     <div class="form-div">
+      <div style="display: flex;  width:100%; color:#f3f1ff;">
+        <h3> Id #</h3>
+        <h3><?php echo "&nbsp;".$row['id'] ?></h3>
+      </div>
       <form action="" method="post" enctype="multipart/form-data">
         <div class="profile-row">
           <div class="input-div" style="display:flex; flex-direction:column; gap:12px;">

@@ -1,5 +1,6 @@
 <?php
 require_once "config.php";
+session_start();
 if (isset($_POST['register'])) {
 
     if (
@@ -40,7 +41,8 @@ if (isset($_POST['register'])) {
                 $result = mysqli_query($con,$query);
                 if ($result) {
                     # code...
-                    echo "insert data";
+                    $_SESSION['register'] = "$fullname added successfuly";
+                    header('location: ../index.php');
                 }else {
                     die("error in insert query");
                 }
@@ -81,3 +83,5 @@ if (isset($_POST['register'])) {
 } else {
     echo "Network is slow";
 }
+
+?>
