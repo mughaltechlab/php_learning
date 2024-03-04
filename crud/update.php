@@ -1,5 +1,5 @@
 <?php
-  include("db/config.php");
+  require("config.php");
 
   if (isset($_GET['updateId'])) {
     # code...
@@ -304,7 +304,7 @@
   <body>
     <div class="header">
       <h3> Update Form </h3>
-      <a href="<?php echo $_SERVER['HTTP_REFERER']?>"><i class="bi bi-x-lg"></i></a>
+      <a href="<?php echo htmlspecialchars($_SERVER['HTTP_REFERER'])?>"><i class="bi bi-x-lg"></i></a>
     </div>
     <div class="form-div">
       <div style="display: flex;  width:100%; color:#f3f1ff;">

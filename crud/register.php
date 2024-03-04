@@ -1,3 +1,11 @@
+<?php 
+session_start();
+
+if (isset($_GET['data'])) {
+  # code...
+  $arr = unserialize(urldecode($_GET['data']));
+}
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,11 +61,47 @@
         background: linear-gradient(10deg, var(--grd1), var(--grd1), var(--grd1), var(--grd1), var(--grd2));
       }
     }
+
+    .error{
+      color: tomato;
+      font-size: 12px;
+    }
   </style>
 </head>
 
 <body>
-  <!-- Registration 6 - Bootstrap Brain Component -->
+  <?php
+    // $firstnameErr = "";
+    // $lastnameErr = "";
+    // $emailErr = "";
+    // $passwordErr = "";
+    // $genderErr = "";
+    // $religionErr = "";
+    // $descErr = "";
+    // if (isset($_SESSION['firstname'])) {
+    //   # code...
+    //   $firstnameErr = $_SESSION['firstname'];
+    // }
+    //  if (isset($_SESSION['lastname'])) {
+    //   # code...
+    //   $lastnameErr = $_SESSION['lastname'];
+    // } if (isset($_SESSION['email'])) {
+    //   # code...
+    //   $emailErr = $_SESSION['email'];
+    // } if (isset($_SESSION['password'])) {
+    //   # code...
+    //   $passwordErr = $_SESSION['password'];
+    // }  if (isset($_SESSION['gender'])) {
+    //   # code...
+    //   $genderErr = $_SESSION['gender'];
+    // }  if (isset($_SESSION['religion'])) {
+    //   # code...
+    //   $religionErr = $_SESSION['religion'];
+    // }  if (isset($_SESSION['desc'])) {
+    //   # code...
+    //   $descErr = $_SESSION['desc'];
+    // }
+  ?>
   <section class="mycard-container p-3 p-md-4 p-xl-5">
     <div class="container">
       <div class="row justify-content-center">
@@ -78,30 +122,58 @@
                     <!--//* first name -->
                     <div class="">
                       <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="firstName" id="firstName" placeholder="First Name" required>
+                        <input type="text" class="form-control" name="firstName" id="firstName" placeholder="First Name" value="<?php echo isset($_GET['data'])? $arr['firstName'] :"" ; ?>" >
                         <label for="firstName" class="form-label">First Name</label>
+                        <span class="error"> <?php 
+                        if (isset($_SESSION['firstname'])) {
+                          # code...
+                          $firstnameErr = $_SESSION['firstname'];
+                          echo $firstnameErr; 
+                        }
+                        ?> </span> 
                       </div>
                     </div>
                     <!--//* last name -->
                     <div class="">
                       <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="lastName" id="lastName" placeholder="First Name" required>
+                        <input type="text" class="form-control" name="lastName" id="lastName" placeholder="First Name" value="<?php echo isset($_GET['data'])? $arr['lastName'] :"" ; ?>" >
                         <label for="lastName" class="form-label">Last Name</label>
+                        <span class="error"> <?php 
+                        if (isset($_SESSION['lastname'])) {
+                          # code...
+                          $lastnameErr = $_SESSION['lastname'];
+                          echo $lastnameErr; 
+                        }
+                        ?> </span> 
                       </div>
                     </div>
                   </div>
                   <!-- //* email -->
                   <div class="col-12">
                     <div class="form-floating mb-3">
-                      <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
+                      <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" value="<?php echo isset($_GET['data'])? $arr['email'] :"" ; ?>" >
                       <label for="email" class="form-label">Email</label>
+                      <span class="error"> <?php 
+                        if (isset($_SESSION['email'])) {
+                          # code...
+                          $emailErr = $_SESSION['email'];
+                          echo $emailErr; 
+                        }
+                        ?> </span> 
                     </div>
                   </div>
                   <!-- //* password -->
                   <div class="col-12">
                     <div class="form-floating mb-3">
-                      <input type="password" class="form-control" name="password" id="password" value="" placeholder="Password" required>
+                      <input type="password" class="form-control" name="password" id="password" value="" placeholder="Password" value="<?php echo isset($_GET['data'])? $arr['password'] :"" ; ?>">
                       <label for="password" class="form-label">Password</label>
+                      <span class="error"> <?php 
+                        if (isset($_SESSION['password'])) {
+                          # code...
+                          $passwordErr = $_SESSION['password'];
+                          echo $passwordErr; 
+                        }
+                        ?> </span> 
                     </div>
                   </div>
                   <!-- //* gender -->
@@ -110,48 +182,83 @@
                     <div class=" col-10 d-flex justify-content-around">
 
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gender" value="male" id="gender1">
+                        <input class="form-check-input" type="radio" name="gender" value="male" id="gender1" <?php echo isset($_GET['data']) ? ($arr['gender'] == 'male' ? "checked" :"") :"" ; ?> >
                         <label class="form-check-label" for="gender1">
                           Male
                         </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gender" value="female" id="gender2">
+                        <input class="form-check-input" type="radio" name="gender" value="female" id="gender2" <?php echo isset($_GET['data']) ? ($arr['gender'] == 'female' ? "checked" :"") :"" ; ?>>
                         <label class="form-check-label" for="gender2">
                           Female
                         </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gender" value="other" id="gender3">
+                        <input class="form-check-input" type="radio" name="gender" value="other" id="gender3" <?php echo isset($_GET['data']) ? ($arr['gender'] == 'other' ? "checked" :"") :"" ; ?>>
                         <label class="form-check-label" for="gender3">
                           Other
                         </label>
                       </div>
                     </div>
+                    
                   </div>
+                  <span class="error"> <?php 
+                        if (isset($_SESSION['gender'])) {
+                          # code...
+                          $genderErr = $_SESSION['gender'];
+                          echo $genderErr; 
+                        }
+                        ?> </span> 
                   <!-- //* religion -->
                   <div>
                     <select class="form-select" name="religion" aria-label="Default select example">
                       <option selected disabled>Select your religion</option>
-                      <option value="Islam">Islam</option>
-                      <option value="Hinduism">Hinduism</option>
-                      <option value="Christian">Christian</option>
+                      <option value="Islam" <?php echo isset($_GET['data']) ? ($arr['religion'] == 'Islam' ? "selected" :"") :"" ; ?> >Islam</option>
+                      <option value="Hinduism" <?php echo isset($_GET['data']) ? ($arr['religion'] == 'Hinduism' ? "selected" :"") :"" ; ?> >Hinduism</option>
+                      <option value="Christian" <?php echo isset($_GET['data']) ? ($arr['religion'] == 'Christian' ? "selected" :"") :"" ; ?> >Christian</option>
                     </select>
+                    <span class="error"> <?php 
+                        if (isset($_SESSION['religion'])) {
+                          # code...
+                          $religionErr = $_SESSION['religion'];
+                          echo $religionErr; 
+                        }
+                        ?> </span>
                   </div>
                   <!-- //* profile image -->
                   <div class="mb-3">
                     <label for="formFileSm" class="form-label text-secondary" style="font-size: 12px;">Upload profile image upto 1mb</label>
                     <input class="form-control" name="image" accept='image/jpeg,image/jpg,image/png' id="formFileSm" type="file">
+                    <span class="error"> <?php 
+                        if (isset($_SESSION['image'])) {
+                          # code...
+                          $imageErr = $_SESSION['image'];
+                          echo $imageErr; 
+                        }
+                        ?> </span>
                   </div>
                   <!-- //* description -->
                   <div class="form-group mb-3">
                     <label class="form-label" class="p-2" for="description">Description</label>
                     <textarea class="form-control" name="description" id="description" rows="6"></textarea>
                   </div>
+                  <?php 
+                    if (
+                      isset($_SESSION['firstname']) ||
+                      isset($_SESSION['lastname']) ||
+                      isset($_SESSION['email']) ||
+                      isset($_SESSION['password']) ||
+                      isset($_SESSION['gender']) ||
+                      isset($_SESSION['religion']) 
+                    ) {
+                      # code...
+                      session_unset();
+                    }
+                  ?>
 
                   <div class="col-12">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" name="iAgree" id="iAgree" required>
+                      <input class="form-check-input" type="checkbox" value="" name="iAgree" id="iAgree" >
                       <label class="form-check-label text-secondary" for="iAgree">
                         I agree to the <a href="#!" class="link-primary text-decoration-none">terms and conditions</a>
                       </label>
