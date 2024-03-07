@@ -85,11 +85,18 @@
             <h1 class="display-4 text-center">Employee Data</h1>
             <table class="table">
                 <thead>
-                    <!-- <tr>
-                        <td scope="col" colspan="2">
-                            <a href="./add_emp.php" class="btn btn-primary">Add Emp</a>
+                    <tr>
+                        <td scope="col" colspan="5">
+                            <?php 
+                                // date_default_timezone_set('Asia/Karachi');
+                                // $time = date("d-Y-m h:i:s:A");
+                                // echo "$time";
+                             ?>
+                                <!-- py-0 px-2 position-absolute top-0 start-0 -->
+                                <a href="./register.php" class="btn btn-primary ">Add Emp</a>
+                                <a href="./db/generateCsv.php" class="btn btn-success float-right">Download in Csv format</a>
                         </td>
-                    </tr> -->
+                    </tr>
                     <tr>
                         <th scope="col" class="col-0">#</th>
                         <th scope="col">Username</th>
@@ -138,7 +145,7 @@
 
                     ?>
                 </div>
-                <a href="./register.php" class="btn btn-primary py-0 px-2 position-absolute top-0 start-0">Add Emp</a>
+                <!-- <a href="./register.php" class="btn btn-primary py-0 px-2 position-absolute top-0 start-0">Add Emp</a> -->
             </div>
         </div>
 <?php
