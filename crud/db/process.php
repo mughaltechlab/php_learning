@@ -145,6 +145,11 @@ if (isset($_POST['register'])) {
     $query = "SELECT * FROM `employee_two` WHERE email='$email' AND password='$password'";
     $result = mysqli_query($con,$query);
     if (mysqli_num_rows($result) > 0) {
+        // $row = mysqli_fetch_assoc($result);
+        $row = $result->fetch_assoc();
+        $email = $row['email'];
+        // session_start();
+        $_SESSION['login_email'] = $email;
         # code...
         header('location: ../index.php');
     }else {

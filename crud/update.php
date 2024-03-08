@@ -9,6 +9,38 @@
     if (mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_assoc($result);
         if (isset($_POST['update'])) {
+          if (isset($_FILES['image'])) {
+            # code...
+             //* file image
+             $imgFolder = './images/';
+             $imageName = basename($_FILES["image"]["name"]);
+             $imageTmpName = $_FILES["image"]["tmp_name"];
+             $targetDir = $imgFolder.$imageName;
+             $isUpload = move_uploaded_file($imageTmpName,$targetDir);
+             if ($isUpload) {
+              // # code...
+              // echo "upload successfuly";
+              $query = "UPDATE employee_two SET
+              id=$id, 
+              fullname='{$_POST['fullName']}',	
+              username='{$_POST['username']}',
+              email='{$_POST['email']}',
+              gender='{$_POST['gender']}',
+              religion='{$_POST['religion']}',
+              description='{$_POST['description']}' ,
+              profile_image='{$imageName}' WHERE id=$id
+              ";
+
+              $result = mysqli_query($con,$query);
+              if ($result) {
+                  // # code...
+                  $_SESSION['update'] = "$id update successfully";
+                  header("location: ./index.php");
+              }
+            } 
+
+          } else {
+            # code...
             $query = "UPDATE employee_two SET
             id=$id, 
             fullname='{$_POST['fullName']}',	
@@ -24,6 +56,8 @@
                 $_SESSION['update'] = "$id update successfully";
                 header("location: ./index.php");
             }
+          }
+          
         }
       # code...
 ?>
@@ -324,11 +358,15 @@
             </div>
           </div>
           <div class="img">
-            <img src="<?php echo 'images/'.$row['profile_image'] ?>" alt="<?php echo $row['fullname'].'\'s Profile Image' ?>">
+            <img id="targetImg" src="<?php echo 'images/'.$row['profile_image'] ?>" alt="<?php echo $row['fullname'].'\'s Profile Image' ?>">
             <!-- <div class="profile-img"></div> -->
           </div>
         </div>
 
+        <div class="mb-3">
+                    <label for="formFileSm" class="form-label text-secondary" style="font-size: 12px;">Upload profile image upto 1mb</label>
+                    <input class="form-control" name="image" accept='image/jpeg,image/jpg,image/png' id="formFileSm" type="file">
+        </div>
         <div class="email-div">
           <label for="">Email</label>
           <input type="text" name="email" value="<?php echo $row['email'] ?>" />
@@ -358,5 +396,20 @@
       die("Connection down");
     }
   ?>
+
+  <script>
+    fileInput = document.getElementById("formFileSm");
+    fileInput.addEventListener('change',(e)=>{
+      file = e.target.files[0];
+      if (file) {
+        reader = new FileReader();
+        reader.onload = (ev)=>{
+          document.getElementById("targetImg").src = ev.target.result;
+        }
+        reader.readAsDataURL(file);
+        console.log(file);
+      }
+    })
+  </script>
   </body>
 </html>

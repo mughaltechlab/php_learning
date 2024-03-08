@@ -1,6 +1,9 @@
 <?php
     require_once "config.php";
     session_start();
+    if (isset($_SESSION['login_email'])) {
+        # code...
+    //     echo $_SESSION['login_email'];
 
     // limit of showing rows on a page
     $limit = 5;
@@ -86,13 +89,14 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <td scope="col" colspan="5">
+                        <td scope="col" colspan="5" class="position-relative" >
                             <?php 
                                 // date_default_timezone_set('Asia/Karachi');
                                 // $time = date("d-Y-m h:i:s:A");
                                 // echo "$time";
                              ?>
                                 <!-- py-0 px-2 position-absolute top-0 start-0 -->
+                                <a href="./db/logout.php" class="btn position-absolute right-0 py-0 px-0 bg-danger"><img src="./logout.png" alt="logout" style="width:20px;"></a>
                                 <a href="./register.php" class="btn btn-primary ">Add Emp</a>
                                 <a href="./db/generateCsv.php" class="btn btn-success float-right">Download in Csv format</a>
                         </td>
@@ -150,6 +154,9 @@
         </div>
 <?php
     }
+} else {
+    header('location: ./register.php');
+}
 mysqli_close($con);
 ?>
 </body>
