@@ -1,5 +1,5 @@
 <?php
-  require("config.php");
+  require("./config.php");
 
   if (isset($_GET['updateId'])) {
     # code...
@@ -354,18 +354,21 @@
             </div>
             <div class="username-div">
               <label for="">Username</label>
-              <input type="text" name="username" value="<?php echo $row['username'] ?>"  />
+              <input type="text" name="username" value="<?php echo $row['username'] ?>"/>
             </div>
           </div>
-          <div class="img">
+          <div class="img" style="position: relative;">
+            <!-- <span id="close-img" class="" style="position: absolute; bottom:0; z-index: 5; background-color: gray; width:100%;"> -->
+              <i class="bi bi-x " id="close-img" class="" style="position: absolute; bottom:0; z-index: 5; background-color: gray; width:100%;" aria-hidden="true"></i>
+            <!-- </span> -->
             <img id="targetImg" src="<?php echo 'images/'.$row['profile_image'] ?>" alt="<?php echo $row['fullname'].'\'s Profile Image' ?>">
             <!-- <div class="profile-img"></div> -->
           </div>
         </div>
 
-        <div class="mb-3">
-                    <label for="formFileSm" class="form-label text-secondary" style="font-size: 12px;">Upload profile image upto 1mb</label>
-                    <input class="form-control" name="image" accept='image/jpeg,image/jpg,image/png' id="formFileSm" type="file">
+        <div class="mb-3 email-div">
+                    <label for="formFileSm" class="text-secondary">Upload Image</label>
+                    <input class="" name="image" accept='image/jpeg,image/jpg,image/png' id="formFileSm" type="file">
         </div>
         <div class="email-div">
           <label for="">Email</label>
@@ -390,6 +393,30 @@
         </div>
       </form>
     </div>
+    <script>
+      fileInput = document.getElementById("formFileSm");
+      closeBtn = document.getElementById("close-img");
+      closeBtn.style.display ='none';
+      fileInput.addEventListener('change',(e)=>{
+        file = e.target.files[0];
+        if (file) {
+          reader = new FileReader();
+          reader.onload = (ev)=>{
+            document.getElementById("targetImg").src = ev.target.result;
+            closeBtn.style.display ='block';
+
+          }
+          reader.readAsDataURL(file);
+          // console.log(file);
+        }
+      })
+      // close function
+      closeBtn.addEventListener('click',(e)=>{
+        document.getElementById("targetImg").src = "<?php echo './images/'.$row['profile_image'] ?>";
+        closeBtn.style.display ='none';
+      });
+
+    </script>
   <?php
     }else { die("Fetching data error"); }
     }else {
@@ -397,19 +424,6 @@
     }
   ?>
 
-  <script>
-    fileInput = document.getElementById("formFileSm");
-    fileInput.addEventListener('change',(e)=>{
-      file = e.target.files[0];
-      if (file) {
-        reader = new FileReader();
-        reader.onload = (ev)=>{
-          document.getElementById("targetImg").src = ev.target.result;
-        }
-        reader.readAsDataURL(file);
-        console.log(file);
-      }
-    })
-  </script>
+  
   </body>
 </html>
