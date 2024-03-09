@@ -2,14 +2,24 @@
   require("./config.php");
 
   if (isset($_GET['updateId'])) {
+
+   
+    // echo '<pre>';
+    // print_r($_REQUEST);
+    // print_r($_FILES);
+    // die('xsss');
     # code...
     $id = $_GET['updateId'];
 
     $result = mysqli_query($con,"SELECT * FROM employee_two WHERE id=$id");
-    if (mysqli_num_rows($result) == 1) {
+    if (mysqli_num_rows($result) == 1) 
+    {
         $row = mysqli_fetch_assoc($result);
-        if (isset($_POST['update'])) {
-          if (isset($_FILES['image'])) {
+        if (isset($_POST['update'])) 
+        {
+          
+          if (isset($_FILES['image']['name']) && $_FILES['image']['name'] != '') 
+          {
             # code...
              //* file image
              $imgFolder = './images/';
@@ -37,9 +47,19 @@
                   $_SESSION['update'] = "$id update successfully";
                   header("location: ./index.php");
               }
-            } 
-
-          } else {
+              else
+              {
+                header("location:update.php?updateId=14&message=failed");
+              }
+            }
+            else
+            {
+               header("location: ./index.php");
+            }
+          } 
+          else 
+          {
+           
             # code...
             $query = "UPDATE employee_two SET
             id=$id, 
@@ -50,12 +70,17 @@
             religion='{$_POST['religion']}',
             description='{$_POST['description']}' WHERE id=$id
             ";
+            // die($query);
             $result = mysqli_query($con,$query);
             if ($result) {
                 # code...
                 $_SESSION['update'] = "$id update successfully";
                 header("location: ./index.php");
             }
+            else
+              {
+                header("location:update.php?updateId=14&message=failed");
+              }
           }
           
         }
@@ -368,7 +393,7 @@
 
         <div class="mb-3 email-div">
                     <label for="formFileSm" class="text-secondary">Upload Image</label>
-                    <input class="" name="image" accept='image/jpeg,image/jpg,image/png' id="formFileSm" type="file">
+                    <input class="img-file" name="image" accept='image/jpeg,image/jpg,image/png' id="formFileSm" type="file">
         </div>
         <div class="email-div">
           <label for="">Email</label>
@@ -413,6 +438,7 @@
       // close function
       closeBtn.addEventListener('click',(e)=>{
         document.getElementById("targetImg").src = "<?php echo './images/'.$row['profile_image'] ?>";
+        document.querySelector(".img-file").value = "" ;
         closeBtn.style.display ='none';
       });
 
