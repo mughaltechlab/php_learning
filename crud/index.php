@@ -42,6 +42,7 @@
     </head>
 
     <body>
+
         <?php
             if (isset($_SESSION['register'])) {
                 $msg = $_SESSION['register'];
@@ -86,66 +87,72 @@
         
         <div class="table container bg-white shadow mt-5 p-2" style="width:80vw">
             <h1 class="display-4 text-center">Employee Data</h1>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <td scope="col" colspan="5" class="position-relative" >
-                            <?php 
-                                // date_default_timezone_set('Asia/Karachi');
-                                // $time = date("d-Y-m h:i:s:A");
-                                // echo "$time";
-                             ?>
-                                <!-- py-0 px-2 position-absolute top-0 start-0 -->
-                                <a href="./db/logout.php" class="btn position-absolute right-0 py-0 px-0 bg-danger"><img src="./logout.png" alt="logout" style="width:20px;"></a>
-                                <a href="./register.php" class="btn btn-primary ">Add Emp</a>
-                                <a href="./db/generateCsv.php" class="btn btn-success float-right">Download in Csv format</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="col" class="col-0">#</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Gender</th>
-                        <th scope="col" class="col-2">Operation</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php 
-                        while($rows = mysqli_fetch_assoc($result)) {
-                            $id = $rows['id'];
-                            $username = $rows['username'];
-                            $email = $rows['email'];
-                            $gender = $rows['gender'];
-                    ?>
-                    <tr>
-                        <th scope="row"> <?php echo $id ?> </th>
-                        <td><?php echo $username ?></td>
-                        <td><?php echo $email ?></td>
-                        <td><?php echo $gender ?></td>
-                        <td>
-                            <button class="btn actionBtn p-1"><a href="show.php?viewId=<?php echo $id ?>" class="text-primary text-decoration-none"><i class="bi bi-eye"></i></a></button>
-                            <button class="btn actionBtn p-1"><a href='update.php?updateId=<?php echo $id ?>' class='text-success text-decoration-none'><i class="bi bi-pen"></i></a></button>
-                            <button class="btn actionBtn p-1"><a href='db/delete.php?deleteId=<?php echo $id ?>' class='text-danger text-decoration-none'><i class="bi bi-trash"></i></a></button>
-                        </td>
-                        <!-- <td>
-                            <button class="btn btn-success"><a href="#?updateId=" class="text-white text-decoration-none" >Update</a></button>
-                            <button class="btn btn-danger"><a href='#?deleteId={$id}' class='text-white text-decoration-none'>Delete</button>
-                        </td> -->
-                    </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-            <div class="container-fluid text-center align-items-center position-relative">
-                <div class="container w-50 bg-">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td scope="col" colspan="5" class="position-relative" >
+                                <?php 
+                                    // date_default_timezone_set('Asia/Karachi');
+                                    // $time = date("d-Y-m h:i:s:A");
+                                    // echo "$time";
+                                 ?>
+                                    <!-- py-0 px-2 position-absolute top-0 start-0 -->
+                                    <a href="./db/logout.php" class="btn position-absolute right-0 py-0 px-0 bg-danger"><img src="./logout.png" alt="logout" style="width:20px;"></a>
+                                    <a href="./register.php" class="btn btn-primary ">Add Emp</a>
+                                    <a href="./db/generateCsv.php" class="btn btn-success float-right">Download in Csv format</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="col-0">#</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col" class="col-2">Operation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                        for ($i=1; $i <= mysqli_num_rows($result) ; $i++) { 
+                            # code...
+                        // }
+                        //     while($rows = mysqli_fetch_assoc($result)) {
+                                $rows = mysqli_fetch_assoc($result);
+                                $id = $rows['id'];
+                                $username = $rows['username'];
+                                $email = $rows['email'];
+                                $gender = $rows['gender'];
+                        ?>
+                        <tr>
+                            <th scope="row"> <?php echo $i ?> </th>
+                            <td><?php echo $username ?></td>
+                            <td><?php echo $email ?></td>
+                            <td><?php echo $gender ?></td>
+                            <td>
+                                <button class="btn actionBtn p-1"><a href="show.php?viewId=<?php echo $id ?>" class="text-primary text-decoration-none"><i class="bi bi-eye"></i></a></button>
+                                <button class="btn actionBtn p-1"><a href='update.php?updateId=<?php echo $id ?>' class='text-success text-decoration-none'><i class="bi bi-pen"></i></a></button>
+                                <button class="btn actionBtn p-1"><a href='db/delete.php?deleteId=<?php echo $id ?>' class='text-danger text-decoration-none'><i class="bi bi-trash"></i></a></button>
+                            </td>
+                            <!-- <td>
+                                <button class="btn btn-success"><a href="#?updateId=" class="text-white text-decoration-none" >Update</a></button>
+                                <button class="btn btn-danger"><a href='#?deleteId={$id}' class='text-white text-decoration-none'>Delete</button>
+                            </td> -->
+                        </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="container-fluid text-center align-items-center position-relative ">
+                <div class="container w-50 w-50 d-flex justify-content-center gap-3 pb-2 align-items-center overflow-hidden overflow-x-auto">
                     <?php
                         $result = mysqli_query($con,"SELECT * FROM employee_two");
                         $rows = mysqli_num_rows($result);
                         $totalPages = ceil($rows/$limit);
                         for ($i=1; $i <= $totalPages; $i++) { 
-                    ?>
-                    <a class="btn text-dark shadow-sm py-0" href="index.php?page=<?php echo $i; ?> "> <?php echo $i ?> </a>
-                    <?php
-                        }
+                        ?>
+                            <a class="btn text-dark shadow-sm py-0" href="index.php?page=<?php echo $i; ?> "> <?php echo $i ?> </a>
+                        <?php
+                            }
 
                     ?>
                 </div>
